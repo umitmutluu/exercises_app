@@ -7,22 +7,25 @@ class SearchService extends ISearchService {
   SearchService(BaseApiService manager) : super(manager);
 
   @override
-  Future<List<SearchModel>?> fetchSearchList(
-      {String? muscle, String? type}) async {
+  Future<List<SearchModel>?> fetchSearchList({String? value}) async {
+    List<SearchModel>? modelElements;
     final response = await baseManager.fetchData(
       endPoint,
       parameters: Map.fromEntries(
-        [
-          NetworkQuery.muscle.muscleQuery(muscle ?? ''),
-          NetworkQuery.type.muscleQuery(type ?? '')
-        ],
+        [NetworkQuery.valueQueryMuscle.valueQueryMuscleFunc(value ?? '')],
       ),
     );
-    final resultModel = response.data;
-    if (resultModel == null) {
-      return [];
+    if (response == []) {
+      final response = await baseManager.fetchData(
+        endPoint,
+        parameters: Map.fromEntries(
+          [NetworkQuery.valueQueryType.valueQueryTypeFunc(value ?? '')],
+        ),
+      );
+      modelElements?.addAll(searchModelFromJson(response));
+    } else {
+      modelElements?.addAll(searchModelFromJson(response));
     }
-    final dataList = searchModelFromJson(resultModel);
-    return dataList;
+    return modelElements;
   }
 }

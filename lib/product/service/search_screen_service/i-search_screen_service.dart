@@ -8,7 +8,7 @@ abstract class ISearchService {
 
   final String endPoint = ISearchServicePath.endPoint.returnValue;
 
-  Future<List<SearchModel>?> fetchSearchList({String muscle, String type});
+  Future<List<SearchModel>?> fetchSearchList({String value});
 }
 
 enum ISearchServicePath {
