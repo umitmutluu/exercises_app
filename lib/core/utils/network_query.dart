@@ -1,8 +1,8 @@
-enum NetworkQuery { muscle, type }
+enum NetworkQuery { valueQueryMuscle, valueQueryType }
 
 extension NetworkQueryExtension on NetworkQuery {
-  MapEntry<String, String> muscleQuery(String muscleQuery) =>
-      MapEntry('muscle', muscleQuery);
-  MapEntry<String, String> typeQuery(String typeQuery) =>
-      MapEntry('type', typeQuery);
+  MapEntry<String, String> valueQueryMuscleFunc(String valueQuery) =>
+      MapEntry('muscle', valueQuery);
+  MapEntry<String, String> valueQueryTypeFunc(String valueQuery) =>
+      MapEntry('muscle', valueQuery);
 }
